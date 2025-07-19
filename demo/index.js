@@ -1,4 +1,4 @@
-import ColorChecker from '../../dist/contrast-checker.js';
+import ColorChecker from '../dist/contrast-checker.js';
 
 const checker = new ColorChecker({
     child: '#lorem',
