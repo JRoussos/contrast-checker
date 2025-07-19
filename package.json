@@ -1,23 +1,27 @@
 {
-  "name": "contrast-checker",
-  "version": "1.0.0",
-  "description": "Given an image it returns a color with the best contrast ratio.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JRoussos/contrast-checker.git"
-  },
-  "keywords": [
-    "contrast",
-    "checker"
-  ],
-  "author": "John Roussos",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/JRoussos/contrast-checker/issues"
-  },
-  "homepage": "https://github.com/JRoussos/contrast-checker#readme"
+    "name": "contrast-checker",
+    "version": "1.0.0",
+    "description": "Given an image it returns a color with the best contrast ratio.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "unbuild"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/JRoussos/contrast-checker.git"
+    },
+    "keywords": [
+        "contrast",
+        "checker"
+    ],
+    "author": "John Roussos",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/JRoussos/contrast-checker/issues"
+    },
+    "homepage": "https://github.com/JRoussos/contrast-checker#readme",
+    "devDependencies": {
+        "unbuild": "^2.0.0"
+    }
 }

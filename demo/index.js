@@ -1,11 +1,4 @@
-# contrast-checker
-Give me an image and I give you the best color for your overlay text 
-
-
-### Example
-
-```js
-import ColorChecker from './dist/index.mjs'
+import ColorChecker from '../../dist/index.mjs'
 
 const checker = new ColorChecker({
     child: '#lorem',
@@ -26,4 +19,3 @@ document.querySelector('#lorem2').style.color = checker.compare([
     '#f00fff', 
     '#02004b'
 ])
-```
