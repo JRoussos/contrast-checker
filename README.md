@@ -1,11 +1,14 @@
 # contrast-checker
 Give me an image and I give you the best color for your overlay text 
 
+### Install 
+
+> npm install @roussos/contrast-checker
 
 ### Example
 
 ```js
-import ColorChecker from '../../dist/contrast-checker.js';
+import ColorChecker from '@roussos/contrast-checker';
 
 const checker = new ColorChecker({
     child: '#lorem',
