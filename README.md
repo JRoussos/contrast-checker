@@ -5,7 +5,7 @@ Give me an image and I give you the best color for your overlay text
 ### Example
 
 ```js
-import ColorChecker from './dist/index.mjs'
+import ColorChecker from '../../dist/contrast-checker.js';
 
 const checker = new ColorChecker({
     child: '#lorem',

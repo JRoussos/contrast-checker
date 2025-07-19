@@ -1,27 +1,35 @@
 {
-    "name": "contrast-checker",
-    "version": "1.0.0",
+    "name": "@roussos/contrast-checker",
+    "version": "0.2.1",
     "description": "Given an image it returns a color with the best contrast ratio.",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "unbuild"
+    "type": "module",
+    "main": "dist/contrast-checker.cjs",
+    "types": "dist/contrast-checker.d.ts",
+    "author": {
+        "name": "John Roussos",
+        "email": "jroussosdev@gmail.com",
+        "url": "https://johnroussos.dev/"
     },
+    "license": "MIT",
+    "homepage": "https://github.com/JRoussos/contrast-checker#readme",
     "repository": {
-        "type": "git",
-        "url": "git+https://github.com/JRoussos/contrast-checker.git"
+        "type": "github",
+        "url": "https://github.com/JRoussos/contrast-checker"
+    },
+    "scripts": {
+        "dev": "vite --host",
+        "build": "vite build",
+        "prepack": "npm run build"
     },
     "keywords": [
-        "contrast",
-        "checker"
+        "contrast checker",
+        "contrast ratio",
+        "color and contrast accessibility",
+        "WCAG"
     ],
-    "author": "John Roussos",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/JRoussos/contrast-checker/issues"
-    },
-    "homepage": "https://github.com/JRoussos/contrast-checker#readme",
     "devDependencies": {
-        "unbuild": "^2.0.0"
+        "pathe": "^2.0.3",
+        "vite": "^7.0.5",
+        "vite-plugin-dts": "^4.5.4"
     }
 }

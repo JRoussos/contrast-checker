@@ -5,9 +5,9 @@
  * @property {String|HTMLElement|null} child  - CSS selector for the element on top of the image
  */
 
-import { hex2rgb } from "../utils/hex2rgb"
-import { luminanceValue } from "../utils/luminanceValue"
-import { printColor } from "../utils/printColor"
+import { hex2rgb } from "./utils/hex2rgb"
+import { luminanceValue } from "./utils/luminanceValue"
+import { printColor } from "./utils/printColor"
 
 /**
  *
