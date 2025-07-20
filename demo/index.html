@@ -4,20 +4,101 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>DEMO | Contrast Checker</title>
+    <style>
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-height: 500px;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .swiper-slide span {
+            color: attr(data-color, #000);
+            font-size: 30vw;
+            /* transition: color 0.5s ease; */
+        }
+
+        .swiper-pagination-bullet {
+            transition: background 0.5s ease;
+        }
+
+        .swiper-pagination-bullets.swiper-pagination-horizontal {
+            width: auto;
+            display: flex;
+            justify-content: center;
+            right: 0;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
 
 <body>
-    <div id="app">
-        <img src="./MainBefore.jpg" />
-        <div style="position: absolute; top: 0;">
-            <p id="lorem">lorem ipsum</p>
-        </div>
-        <div style="position: absolute;bottom: 666px;left: 586px;">
-            <p id="lorem2">lorem ipsum</p>
+    <div class="swiper-slider" style="position: relative;">
+        <div class="swiper mySwiper swiper-initialized swiper-horizontal swiper-backface-hidden">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="./flags.jpg" />
+                    <div
+                        style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+                        <span>Slide 1</span>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="./bicycle.jpg" />
+                    <div
+                        style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+                        <span>Slide 2</span>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="./clowns.jpg" />
+                    <div
+                        style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+                        <span>Slide 3</span>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="./knight.jpg" />
+                    <div
+                        style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+                        <span>Slide 4</span>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="./unicycle.jpg" />
+                    <div
+                        style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+                        <span>Slide 5</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination swiper-pagination-bullets swiper-pagination-horizontal">
+                <span class="swiper-pagination-bullet"></span>
+                <span class="swiper-pagination-bullet"></span>
+                <span class="swiper-pagination-bullet"></span>
+                <span class="swiper-pagination-bullet"></span>
+                <span class="swiper-pagination-bullet"></span>
+            </div>
         </div>
     </div>
-    <script type="module" src="./index.js"></script>
+    <script type="module" src="./index.js" defer></script>
 </body>
 
 </html>
