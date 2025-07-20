@@ -11,8 +11,8 @@ function handlePaginationBulletColors (swiper) {
     })
 
     const color = checker.compare([
-        '#ffffff', 
-        '#000000'
+        '#fff', 
+        '#000'
     ])
     
     document.documentElement.style.setProperty('--swiper-pagination-bullet-inactive-opacity', 0.5)
