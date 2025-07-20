@@ -5,6 +5,11 @@
  * @returns An array with the rgb channels 
  */
 export const hex2rgb = hex => {
+<<<<<<< HEAD
+=======
+    // const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+
+>>>>>>> 974f55edb744740f3b314a38d7eab43a1abef35d
     const result = /^#?([a-f\d]{1,2})([a-f\d]{1,2})([a-f\d]{1,2})$/i.exec(hex);
     
     if (!result) {
