@@ -71,7 +71,6 @@ Parameters:
 Options  |  Type               | Description                                                                                                
 -------- | ------------------- | ------------------------------------------------------------------------------------------------------------
 child    | HTMLElement, String | The child element whose background is analyzed.
-                  
 parent   | HTMLElement, String | The parent element behind the child. Must be an <img/> element or an element containing one.
 
 
