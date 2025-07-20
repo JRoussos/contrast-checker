@@ -5,9 +5,10 @@
  * @property {String|HTMLElement|null} child  - CSS selector for the element on top of the image
  */
 
-import { hex2rgb } from "./utils/hex2rgb"
+import { hex2rgb }        from "./utils/hex2rgb"
+import { printColor }     from "./utils/printColor"
+import { rgb2hex }        from "./utils/rgb2hex"
 import { luminanceValue } from "./utils/luminanceValue"
-import { printColor } from "./utils/printColor"
 
 /**
  *
@@ -21,7 +22,10 @@ function ColorChecker(params) {
         }
 
         this.canvas = document.createElement('canvas')
-        this.setComparableElements(params)
+        
+        if (params) {
+            this.setComparableElements(params)
+        }
     }
 
     catch (error) {
@@ -118,6 +122,7 @@ ColorChecker.prototype.checkeElementsIntersection = function () {
  * 
  * @param {ColorCheckerOptions} params
  *
+ * @returns {ColorChecker} - The current instance of ColorChecker for method chaining
  */
 ColorChecker.prototype.updateOptions = function (params) {
     try {
@@ -127,10 +132,12 @@ ColorChecker.prototype.updateOptions = function (params) {
         }
 
         this.setComparableElements(params)
+        return this
     }
 
     catch (error) {
         console.warn('(ERROR) ColorChecker:', error)
+        return this
     }
 }
 
@@ -195,7 +202,6 @@ ColorChecker.prototype.compare = function (color = [], debug = false) {
 
             return l1 > l2 ? acc : cur
         })
-
     } 
     
     catch (error) {
