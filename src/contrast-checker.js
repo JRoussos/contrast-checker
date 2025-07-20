@@ -191,17 +191,27 @@ ColorChecker.prototype.compare = function (color = [], debug = false) {
         ]
 
         const l_avg = luminanceValue(avg)
-
-        if (debug) {
-            printColor(avg, this.options.child)
-        }
-
-        return color.reduce((acc, cur) => {
+        const result = color.reduce((acc, cur) => {
             const l1 = Math.abs(luminanceValue(hex2rgb(acc)) - l_avg)
             const l2 = Math.abs(luminanceValue(hex2rgb(cur)) - l_avg)
 
             return l1 > l2 ? acc : cur
         })
+
+        if (debug) {
+            console.log('Child element', this.options.child)
+            console.log('Parent element', this.options.parent)
+
+            console.table({
+                'Avg value':       rgb2hex(avg),
+                'Avg luminance':   l_avg,
+                'Result':          result,
+            })
+
+            printColor(avg, this.options.child)
+        }
+
+        return result
     } 
     
     catch (error) {
