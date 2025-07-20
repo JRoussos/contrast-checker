@@ -1,6 +1,6 @@
 {
     "name": "@roussos/contrast-checker",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "description": "Given an image it returns a color with the best contrast ratio.",
     "type": "module",
     "main": "dist/contrast-checker.cjs",
