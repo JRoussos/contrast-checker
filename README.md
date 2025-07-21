@@ -63,7 +63,8 @@ const closestColor = checker.compare(['#ffffff', '#d23d11', '#02004b'], true);
 
 ### API
 
-`ColorChecker(options)`
+**`ColorChecker(options)`**
+
 Creates a new instance of ColorChecker.
 
 Parameters:
@@ -78,7 +79,8 @@ parent   | HTMLElement, String | The parent element behind the child. Must be an
 <br>
 <br>
 
-`compare(color, debug)`
+**`compare(color, debug)`**
+
 Finds the closest matching color from the provided array.
 
 Parameters:
@@ -94,7 +96,16 @@ The color from the array that has the most contrast to the average color of the 
 <br>
 <br>
 
-`updateOptions(options)`
+**`compareAsync(color, debug)`**
+
+Same as `compare` but it returns a promise with the computed color.
+
+---
+<br>
+<br>
+
+**`updateOptions(options)`**
+
 Updates the instance's options with new Child and Parent elements.
 
 Parameters:

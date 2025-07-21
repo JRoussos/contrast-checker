@@ -142,82 +142,117 @@ ColorChecker.prototype.updateOptions = function (params) {
 }
 
 /**
- * @property {String[]|null} color    - Array of colors to check the contrast against the image 
- * @property {Boolean} [debug=false]  - Append the calculated average color in the DOM
+ * @param {String[]|null} color    - Array of colors to check the contrast against the image 
+ * @param {Boolean} [debug=false]  - Append the calculated average color in the DOM
  * 
- * @returns {String} - The color from the array that has the closest luminance value to the average color of the child element
+ * @returns {String} - The color from the array that has the most contrast with the average color of the child element
+ * 
+ * @private
+ */
+ColorChecker.prototype.coreCompareFunction = function (color = [], debug = false) {
+    if (Array.isArray(color) && color.length <= 0) {
+        throw new Error('Empty colors array')
+    }
+
+    if (!this.options.child || !this.options.parent) {
+        throw new Error('Child or parent element is not set.')
+    }
+
+    const c_bounds = this.options.child.getBoundingClientRect()
+    const p_bounds = this.options.parent.getBoundingClientRect()
+
+    this.canvas.width = p_bounds.width
+    this.canvas.height = p_bounds.height
+
+    const ctx = this.canvas.getContext('2d', {
+        willReadFrequently: true
+    })
+
+    const left = c_bounds.left - p_bounds.left
+    const top = c_bounds.top - p_bounds.top
+
+    ctx.drawImage(this.options.parent, 0, 0, this.canvas.width, this.canvas.height)
+
+    const imageData = ctx.getImageData(left, top, c_bounds.width, c_bounds.height)
+    const data = Float32Array.from(imageData.data)
+
+    const length = data.length / 4
+    const rgb_sum = [0, 0, 0]
+
+    for (let index = 0; index < length; index++) {
+        rgb_sum[0] += data[index * 4 + 0]
+        rgb_sum[1] += data[index * 4 + 1]
+        rgb_sum[2] += data[index * 4 + 2]
+    }
+
+    const avg = [
+        Math.floor(rgb_sum[0] / length),
+        Math.floor(rgb_sum[1] / length),
+        Math.floor(rgb_sum[2] / length)
+    ]
+
+    const l_avg = luminanceValue(avg)
+    const result = color.reduce((acc, cur) => {
+        const l1 = Math.abs(luminanceValue(hex2rgb(acc)) - l_avg)
+        const l2 = Math.abs(luminanceValue(hex2rgb(cur)) - l_avg)
+
+        return l1 > l2 ? acc : cur
+    })
+
+    if (debug) {
+        console.log('Child element', this.options.child)
+        console.log('Parent element', this.options.parent)
+
+        console.table({
+            'Avg value':       rgb2hex(avg),
+            'Avg luminance':   l_avg,
+            'Result':          result,
+        })
+
+        printColor(avg, this.options.child)
+    }
+
+    return result
+}
+
+/**
+ * Compare the average color of the child element against an array of hex colors.
+ * 
+ * @param {String[]|null} color    - Array of colors to check the contrast against the image 
+ * @param {Boolean} [debug=false]  - Append the calculated average color in the DOM
+ * 
+ * @returns {String} - The color from the array that has the most contrast with the average color of the child element
  */
 ColorChecker.prototype.compare = function (color = [], debug = false) {
     try {
-        if (Array.isArray(color) && color.length <= 0) {
-            throw new Error('Empty colors array')
-        }
-
-        if (!this.options.child || !this.options.parent) {
-            throw new Error('Child or parent element is not set.')
-        }
-
-        const c_bounds = this.options.child.getBoundingClientRect()
-        const p_bounds = this.options.parent.getBoundingClientRect()
-
-        this.canvas.width = p_bounds.width
-        this.canvas.height = p_bounds.height
-
-        const ctx = this.canvas.getContext('2d', {
-            willReadFrequently: true
-        })
-
-        const left = c_bounds.left - p_bounds.left
-        const top = c_bounds.top - p_bounds.top
-
-        ctx.drawImage(this.options.parent, 0, 0, this.canvas.width, this.canvas.height)
-
-        const imageData = ctx.getImageData(left, top, c_bounds.width, c_bounds.height)
-        const data = Float32Array.from(imageData.data)
-
-        const length = data.length / 4
-        const rgb_sum = [0, 0, 0]
-
-        for (let index = 0; index < length; index++) {
-            rgb_sum[0] += data[index * 4 + 0]
-            rgb_sum[1] += data[index * 4 + 1]
-            rgb_sum[2] += data[index * 4 + 2]
-        }
-
-        const avg = [
-            Math.floor(rgb_sum[0] / length),
-            Math.floor(rgb_sum[1] / length),
-            Math.floor(rgb_sum[2] / length)
-        ]
-
-        const l_avg = luminanceValue(avg)
-        const result = color.reduce((acc, cur) => {
-            const l1 = Math.abs(luminanceValue(hex2rgb(acc)) - l_avg)
-            const l2 = Math.abs(luminanceValue(hex2rgb(cur)) - l_avg)
-
-            return l1 > l2 ? acc : cur
-        })
-
-        if (debug) {
-            console.log('Child element', this.options.child)
-            console.log('Parent element', this.options.parent)
-
-            console.table({
-                'Avg value':       rgb2hex(avg),
-                'Avg luminance':   l_avg,
-                'Result':          result,
-            })
-
-            printColor(avg, this.options.child)
-        }
-
-        return result
+        return this.coreCompareFunction(color, debug)
     } 
     
     catch (error) {
         console.warn('(ERROR) ColorChecker:', error)
-        return window.getComputedStyle(this.options.child ?? document.body)['color'] || 'rgb(0, 0, 0)'
+        return 'rgb(0, 0, 0)'
     }
+}
+
+/**
+ * Compare the average color of the child element against an array of hex colors.
+ * 
+ * @param {String[]|null} color    - Array of colors to check the contrast against the image 
+ * @param {Boolean} [debug=false]  - Append the calculated average color in the DOM
+ * 
+ * @returns {Promise} - A promise that resolves with the color from the array that has the most contrast with the average color of the child element
+ */
+ColorChecker.prototype.compareAsync = function (color = [], debug = false) {
+    return new Promise((resolve, reject) => {
+        try {
+            resolve(this.coreCompareFunction(color, debug))
+        } 
+        
+        catch (error) {
+            console.warn('(ERROR) ColorChecker:', error)
+            reject(error)
+        }
+    })
 }
 
 export default ColorChecker
