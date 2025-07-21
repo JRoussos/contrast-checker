@@ -19,6 +19,7 @@
     "scripts": {
         "dev": "vite --host",
         "build": "vite build",
+        "build:site": "vite build --config demo/vite.config.js",
         "prepack": "npm run build"
     },
     "keywords": [
