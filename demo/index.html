@@ -11,6 +11,11 @@
             height: 500px;
         }
 
+        .markdown-body {
+            width: min(100%, 860px);
+            margin: 30px auto !important;
+        }
+
         .swiper-slide {
             text-align: center;
             font-size: 18px;
@@ -44,6 +49,16 @@
             display: flex;
             justify-content: center;
             right: 0;
+        }
+
+        .links {
+            position: fixed;
+            top: 0;
+            right: 0;
+        }
+
+        .links img {
+            height: 25px;
         }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -98,6 +113,7 @@
                 <span class="swiper-pagination-bullet"></span>
             </div>
         </div>
+        <div id="read-me-container" class="markdown-body"></div>
     </div>
     <script type="module" src="./index.js" defer></script>
 </body>

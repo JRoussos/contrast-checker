@@ -1,6 +1,6 @@
 {
     "name": "@roussos/contrast-checker",
-    "version": "0.2.5",
+    "version": "0.2.6",
     "description": "Given an image it returns a color with the best contrast ratio.",
     "type": "module",
     "main": "dist/contrast-checker.cjs",
@@ -19,13 +19,14 @@
     "scripts": {
         "dev": "vite --host",
         "build": "vite build",
-        "build:site": "vite build --config demo/vite.config.js",
         "prepack": "npm run build"
     },
     "keywords": [
         "contrast checker",
         "contrast ratio",
         "color and contrast accessibility",
+        "image color contrast",
+        "text over image contrast",
         "WCAG"
     ],
     "devDependencies": {

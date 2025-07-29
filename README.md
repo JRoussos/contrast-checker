@@ -10,6 +10,10 @@ It computes the average color of a DOM element’s subregion (e.g. a child eleme
 - Debug mode appends the calculated average color to the DOM and logs the results.
 - Lightweight and easy to integrate.
 
+### Demo
+
+[Check out the demo here](https://contrast-checker-demo.netlify.app/)
+
 ### Installation
 
 You can include the script in your project by installing it from npm:
